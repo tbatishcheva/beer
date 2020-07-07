@@ -1,0 +1,25 @@
+.button {
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 16px;
+    border: thin solid #0000001f;
+    border-radius: 4px;
+    background-color: white;
+    outline: none;
+}
+
+@media (hover: hover) {
+    .button:hover {
+        filter: brightness(90%);
+    }
+}
+
+.default {
+    background-color: white;
+    color: currentColor;
+}
+
+.highlighted {
+    background-color: crimson;
+    color: white;
+}

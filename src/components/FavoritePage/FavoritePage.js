@@ -1,17 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import styles from './FavoriteBeers.module.css';
+import styles from './FavoritePage.module.css';
+import Header from '../App/Header/Header';
+import FavoriteBeers from '../FavoriteBeers/FavoriteBeers';
 
-FavoriteBeers.propTypes = {
-
-};
-
-function FavoriteBeers(props) {
+function FavoritePage() {
   return (
-    <div>
-      erere
+    <div className={styles.favoritePage}>
+      <Header />
+      <FavoriteBeers />
     </div>
   );
 }
 
-export default FavoriteBeers;
+export default FavoritePage;
