@@ -1,1 +1,2 @@
 export const TOGGLE_FAVORITES = 'TOGGLE_FAVORITES';
+export const UPDATE_BEERS = 'UPDATE_BEERS';

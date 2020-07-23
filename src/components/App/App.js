@@ -3,9 +3,8 @@ import {
   BrowserRouter as Router,
 } from 'react-router-dom';
 import { Route } from 'react-router';
+import BeerApi from '../../API/BeerApi';
 import AppContext from '../../contexts/AppContext';
-import beers from '../../data/beers.json';
-import Beer from '../../models/Beer';
 import BeerDetails from '../BeerDetails/BeerDetails';
 import { TOGGLE_FAVORITES } from '../constants/actionTypes';
 import toggle from '../../helpers/toggle';
@@ -13,8 +12,8 @@ import MainPage from '../MainPage/MainPage';
 import FavoritePage from '../FavoritePage/FavoritePage';
 
 const appState = {
-  beers: beers.map((b) => new Beer(b)),
   favoriteBeers: [],
+  beerApi: new BeerApi(),
 };
 
 const reducer = (state, action) => {
