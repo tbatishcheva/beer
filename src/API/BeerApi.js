@@ -1,8 +1,8 @@
-const MAIN_API = 'https://api.punkapi.com/';
+const MAIN_API = 'https://api.punkapi.com/v2/beers';
 
 export default class BeerApi {
   fetchAllBeer() {
-    return fetch(`${MAIN_API}v2/beers`)
+    return fetch(`${MAIN_API}`)
       .then((res) => res.json())
       .catch();
   }
@@ -12,11 +12,9 @@ export default class BeerApi {
    * @return {Promise}
    */
   fetchBeersByIds(ids) {
-    const promises = ids
-      .map((id) => fetch(`${MAIN_API}v2/beers/${id}`)
-        .then((res) => res.json()));
-    return Promise.all(promises)
-      .then((res) => res.flat())
+    const params = ids.join('|');
+    return fetch(`${MAIN_API}?ids/${params}`)
+      .then((res) => res.json())
       .catch();
   }
 
@@ -25,7 +23,7 @@ export default class BeerApi {
    * @return {Promise}
    */
   fetchBeerById(id) {
-    return fetch(`${MAIN_API}v2/beers/${id}`)
+    return fetch(`${MAIN_API}/${id}`)
       .then((res) => res.json())
       .catch();
   }
