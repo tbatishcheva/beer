@@ -19,4 +19,14 @@ export default class BeerApi {
       .then((res) => res.flat())
       .catch();
   }
+
+  /**
+   * @param {number} id
+   * @return {Promise}
+   */
+  fetchBeerById(id) {
+    return fetch(`${MAIN_API}v2/beers/${id}`)
+      .then((res) => res.json())
+      .catch();
+  }
 }
