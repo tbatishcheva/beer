@@ -1,28 +1,36 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import {
   BrowserRouter as Router,
 } from 'react-router-dom';
 import { Route } from 'react-router';
+import { SET_FAVORITES, TOGGLE_FAVORITES } from '../../constants/actionTypes';
 import BeerApi from '../../API/BeerApi';
 import AppContext from '../../contexts/AppContext';
 import BeerDetails from '../BeerDetails/BeerDetails';
-import { TOGGLE_FAVORITES } from '../constants/actionTypes';
+
 import toggle from '../../helpers/toggle';
 import MainPage from '../MainPage/MainPage';
 import FavoritePage from '../FavoritePage/FavoritePage';
 
 const appState = {
-  favoriteBeers: [],
+  favoriteBeerIds: [],
   beerApi: new BeerApi(),
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case TOGGLE_FAVORITES:
+      const favoriteBeerIds = toggle(state.favoriteBeerIds, action.beer.id);
+      window.localStorage.setItem('favoriteBeerIds', JSON.stringify(favoriteBeerIds));
       return {
         ...state,
-        favoriteBeers:
-            toggle(state.favoriteBeers, action.beer.id),
+        favoriteBeerIds,
+      };
+    case SET_FAVORITES:
+      const favoriteBeerIdsLs = window.localStorage.getItem('favoriteBeerIds');
+      return {
+        ...state,
+        favoriteBeerIds: favoriteBeerIdsLs ? JSON.parse(favoriteBeerIdsLs) : [],
       };
     default:
       return 'Error';
@@ -31,6 +39,12 @@ const reducer = (state, action) => {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, appState);
+
+  useEffect(() => {
+    dispatch({
+      type: SET_FAVORITES,
+    });
+  }, [dispatch]);
 
   return (
     <AppContext.Provider value={{ ...state, dispatch }}>

@@ -6,14 +6,15 @@ import Beer from '../../models/Beer';
 import Button,
 { DEFAULT_COLOR, HIGHLIGHTED_COLOR } from '../Button/Button';
 import AppContext from '../../contexts/AppContext';
-import { TOGGLE_FAVORITES } from '../constants/actionTypes';
+import { TOGGLE_FAVORITES } from '../../constants/actionTypes';
 
 BeerItem.propTypes = {
   beer: PropTypes.instanceOf(Beer).isRequired,
 };
 
 function BeerItem({ beer }) {
-  const { dispatch, favoriteBeers } = useContext(AppContext);
+  const { dispatch, favoriteBeerIds } = useContext(AppContext);
+
   const handleLikeClick = useCallback(
     () => {
       dispatch({
@@ -23,9 +24,10 @@ function BeerItem({ beer }) {
     },
     [beer, dispatch],
   );
+
   const isActive = useMemo(
-    () => favoriteBeers.includes(beer.id),
-    [beer, favoriteBeers],
+    () => favoriteBeerIds.includes(beer.id),
+    [beer, favoriteBeerIds],
   );
 
   return (

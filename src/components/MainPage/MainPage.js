@@ -4,7 +4,7 @@ import MainPageContext from '../../contexts/MainPageContext';
 import styles from './MainPage.module.css';
 import Header from '../App/Header/Header';
 import AllBeers from '../AllBeers/AllBeers';
-import { UPDATE_BEERS } from '../constants/actionTypes';
+import { UPDATE_BEERS } from '../../constants/actionTypes';
 
 const mainPageState = {
   beers: null,
