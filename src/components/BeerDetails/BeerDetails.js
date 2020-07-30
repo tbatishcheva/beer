@@ -16,7 +16,7 @@ const detailsPageState = {
 const detailsPageReducer = (state, action) => {
   switch (action.type) {
     case SET_BEER:
-      return { ...state, beer: action.resBeer };
+      return { ...state, beer: action.beer };
     default:
       return 'Error!';
   }
@@ -27,11 +27,11 @@ function BeerDetails() {
   const { beerApi } = useContext(AppContext);
   const { id } = useParams();
 
-  const setBeer = useCallback((resBeer) => {
+  const setBeer = useCallback((beer) => {
     detailsPageDispatch(
       {
         type: SET_BEER,
-        resBeer,
+        beer,
       },
     );
   }, [detailsPageDispatch]);

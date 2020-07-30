@@ -15,20 +15,23 @@ Button.propTypes = {
   className: PropTypes.string,
   onClick: PropTypes.func,
   color: PropTypes.oneOf(Object.keys(COLORS_MAP)),
+  disabled: PropTypes.bool,
 };
 
 Button.defaultProps = {
   className: '',
   onClick: null,
   color: DEFAULT_COLOR,
+  disabled: false,
 };
 
-function Button({
-  children, className, onClick, color, ...rest
+export default function Button({
+  children, className, onClick, color, disabled, ...rest
 }) {
   const buttonClassName = `
-    ${styles.button} 
+    ${styles.button}
     ${className}
+    ${disabled ? styles.disabled : ''}
     ${COLORS_MAP[color]}
   `;
 
@@ -45,5 +48,3 @@ function Button({
     </button>
   );
 }
-
-export default Button;

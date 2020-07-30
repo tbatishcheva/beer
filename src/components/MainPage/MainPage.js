@@ -4,16 +4,25 @@ import MainPageContext from '../../contexts/MainPageContext';
 import styles from './MainPage.module.css';
 import Header from '../App/Header/Header';
 import AllBeers from '../AllBeers/AllBeers';
-import { UPDATE_BEERS } from '../../constants/actionTypes';
+import { UPDATE_BEERS, LOAD_ALL_DATA } from '../../constants/actionTypes';
 
 const mainPageState = {
-  beers: null,
+  beers: [],
+  isAllDataLoaded: false,
 };
+
+/**
+ * @param {Object[]} beers
+ * @return {Beer[]}
+ */
+const transformResult = (beers) => beers.map((b) => new Beer(b));
 
 const mainPageReducer = (state, action) => {
   switch (action.type) {
     case UPDATE_BEERS:
-      return { ...state, beers: action.beers.map((b) => new Beer(b)) };
+      return { ...state, beers: [...state.beers, ...transformResult(action.beers)] };
+    case LOAD_ALL_DATA:
+      return { ...state, isAllDataLoaded: true };
     default:
       return 'Error!!';
   }

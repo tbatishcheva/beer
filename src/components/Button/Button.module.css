@@ -23,3 +23,15 @@
     background-color: crimson;
     color: white;
 }
+
+.disabled{
+    color: darkgray;
+    cursor: not-allowed;
+    user-select: none;
+}
+
+@media (hover: hover) {
+    .disabled:hover {
+        filter: none;
+    }
+}

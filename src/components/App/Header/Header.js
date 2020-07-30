@@ -1,19 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import AppLink from '../../AppLink/AppLink';
 import styles from './Header.module.css';
 
 function Header() {
+  const location = useLocation();
+
   return (
-    <div className={styles.header}>
-      <header className={styles.mainHeader}>
-        <Link className={styles.link} to="/">
-          Beers
-        </Link>
-      </header>
-      <Link className={styles.favoritesLink} to="/favorites">
-        Favorites
-      </Link>
-    </div>
+    <header className={styles.header}>
+      <ul className={styles.list}>
+        <li className={styles.listItem}>
+          <AppLink to="/" active={location.pathname === '/'}>
+            Home
+          </AppLink>
+        </li>
+        <li className={styles.listItem}>
+          <AppLink to="/favorites" active={location.pathname === '/favorites'}>
+            Favorites
+          </AppLink>
+        </li>
+      </ul>
+    </header>
   );
 }
 

@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
 } from 'react-router-dom';
 import { Route } from 'react-router';
-import { SET_FAVORITES, TOGGLE_FAVORITES } from '../../constants/actionTypes';
+import { SET_FAVORITES, TOGGLE_FAVORITES, INCREASE_PAGE_COUNT } from '../../constants/actionTypes';
 import BeerApi from '../../API/BeerApi';
 import AppContext from '../../contexts/AppContext';
 import BeerDetails from '../BeerDetails/BeerDetails';
@@ -15,23 +15,37 @@ import FavoritePage from '../FavoritePage/FavoritePage';
 const appState = {
   favoriteBeerIds: [],
   beerApi: new BeerApi(),
+  pageNumber: 1,
+};
+
+/**
+ * @param {number[]} favoriteBeerIds
+ * @param {number} id
+ * @return {number[]}
+ */
+const toggleFavorites = (favoriteBeerIds, id) => {
+  const result = toggle(favoriteBeerIds, id);
+  window.localStorage.setItem('favoriteBeerIds', JSON.stringify(result));
+
+  return result;
+};
+
+/**
+ * @return {number[]}
+ */
+const setFavoriteBeers = () => {
+  const favoriteBeerIdsLs = window.localStorage.getItem('favoriteBeerIds');
+  return favoriteBeerIdsLs ? JSON.parse(favoriteBeerIdsLs) : [];
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case TOGGLE_FAVORITES:
-      const favoriteBeerIds = toggle(state.favoriteBeerIds, action.beer.id);
-      window.localStorage.setItem('favoriteBeerIds', JSON.stringify(favoriteBeerIds));
-      return {
-        ...state,
-        favoriteBeerIds,
-      };
+      return { ...state, favoriteBeerIds: toggleFavorites(state.favoriteBeerIds, action.beer.id) };
     case SET_FAVORITES:
-      const favoriteBeerIdsLs = window.localStorage.getItem('favoriteBeerIds');
-      return {
-        ...state,
-        favoriteBeerIds: favoriteBeerIdsLs ? JSON.parse(favoriteBeerIdsLs) : [],
-      };
+      return { ...state, favoriteBeerIds: setFavoriteBeers() };
+    case INCREASE_PAGE_COUNT:
+      return { ...state, pageNumber: state.pageNumber + 1 };
     default:
       return 'Error';
   }

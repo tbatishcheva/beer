@@ -1,4 +1,5 @@
 .beerItem {
+    height: 600px;
     display: flex;
     flex-direction: column;
     box-shadow:
@@ -32,6 +33,11 @@
 }
 
 .description {
+    height: 200px;
+    overflow: hidden;
+    background: linear-gradient(180deg, black 0%, black 70%, transparent 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .controls {

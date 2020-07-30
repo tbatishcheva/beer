@@ -1,8 +1,13 @@
+/* eslint-disable */
 const MAIN_API = 'https://api.punkapi.com/v2/beers';
 
 export default class BeerApi {
-  fetchAllBeer() {
-    return fetch(`${MAIN_API}`)
+  /**
+   * @param {number} pageNumber
+   * @return {Promise}
+   */
+  fetchAllBeer(pageNumber) {
+    return fetch(`${MAIN_API}?page=${pageNumber}`)
       .then((res) => res.json())
       .catch();
   }
@@ -13,7 +18,7 @@ export default class BeerApi {
    */
   fetchBeersByIds(ids) {
     const params = ids.join('|');
-    return fetch(`${MAIN_API}?ids/${params}`)
+    return fetch(`${MAIN_API}?ids=${params}`)
       .then((res) => res.json())
       .catch();
   }

@@ -1,0 +1,15 @@
+.link {
+    color: white;
+    text-decoration: none;
+}
+
+@media (hover: hover) {
+    .link:hover {
+        text-decoration: underline;
+        filter: brightness(80%);
+    }
+}
+
+.active {
+    text-decoration: underline;
+}

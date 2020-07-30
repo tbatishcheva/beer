@@ -1,8 +1,5 @@
 .header {
     font-family: 'Galada', cursive;
-}
-
-.mainHeader {
     text-align: center;
     background-color: #282c34;
     min-height: 100px;
@@ -13,20 +10,16 @@
     font-size: 32px;
 }
 
-.link {
-    color: white;
-    text-decoration: none;
+.list {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
 }
 
-.favoritesLink {
-    color: crimson;
-    text-decoration: underline;
-    font-size: 28px;
-    margin: 100px;
+.listItem {
+    margin: 0 20px 0 0;
 }
 
-@media (hover: hover) {
-    .favoritesLink:hover {
-        filter: brightness(80%);
-    }
+.listItem:last-child {
+    margin: 0;
 }
