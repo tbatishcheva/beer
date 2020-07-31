@@ -32,4 +32,14 @@ export default class BeerApi {
       .then((res) => res.json())
       .catch();
   }
+
+  /**
+   * @param {string} food
+   * @return {Promise}
+   */
+  fetchBeerByFood(food) {
+    return fetch(`${MAIN_API}?food=${food}`)
+      .then((res) => res.json())
+      .catch();
+  }
 }

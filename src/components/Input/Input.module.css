@@ -1,0 +1,23 @@
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.input {
+    background-color: transparent;
+    border: none;
+    border-bottom: thin #4e4e4e solid;
+    color: white;
+    outline: none;
+    font-size: 18px;
+    padding: 6px 0;
+}
+
+.input:focus {
+    border-bottom: thin white solid;
+}
+
+.helperText {
+    font-size: 12px;
+}

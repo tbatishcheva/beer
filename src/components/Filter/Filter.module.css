@@ -1,0 +1,15 @@
+.filter {
+    width: 100%;
+    background-color: #2a2834;
+    /*font-family: 'Galada', cursive;*/
+    font-size: 32px;
+
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.title {
+    margin: 20px;
+}
