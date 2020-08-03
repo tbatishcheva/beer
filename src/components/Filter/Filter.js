@@ -1,36 +1,59 @@
 import React, { useCallback, useContext } from 'react';
 import MainPageContext from '../../contexts/MainPageContext';
-import { LOAD_ALL_DATA, REPLACE_BEERS } from '../../constants/actionTypes';
-import styles from './Filter.module.css';
+import {
+  SET_FILTER_PARAMS,
+  TOGGLE_LOAD_ALL_DATA,
+  RESET_PAGE_NUMBER,
+} from '../../constants/actionTypes';
 import Input from '../Input/Input';
 import AppContext from '../../contexts/AppContext';
+import styles from './Filter.module.css';
 
 export default function Filter() {
-  const { beerApi } = useContext(AppContext);
   const { mainPageDispatch } = useContext(MainPageContext);
+  const { dispatch } = useContext(AppContext);
 
-  const updateBeers = useCallback((beersRes) => {
+  const updateFilters = useCallback((filterParams) => {
     mainPageDispatch({
-      type: LOAD_ALL_DATA,
+      type: SET_FILTER_PARAMS,
+      filterParams,
     });
 
     mainPageDispatch({
-      type: REPLACE_BEERS,
-      beers: beersRes,
+      type: TOGGLE_LOAD_ALL_DATA,
+      isAllDataLoaded: false,
     });
-  }, [mainPageDispatch]);
+
+    dispatch({
+      type: RESET_PAGE_NUMBER,
+    });
+  }, [mainPageDispatch, dispatch]);
 
   const handleFoodChange = useCallback((e) => {
     const { value } = e.target;
-    beerApi.fetchBeerByFood(value).then((res) => updateBeers(res));
-  }, []);
+    const filterParams = {
+      food: value,
+    };
+
+    updateFilters(filterParams);
+  }, [updateFilters]);
+
+  const handleHopsChange = useCallback((e) => {
+    const { value } = e.target;
+    const filterParams = {
+      hops: value,
+    };
+
+    updateFilters(filterParams);
+  }, [updateFilters]);
 
   return (
     <div className={styles.filter}>
       <div className={styles.title}>
         Filters:
       </div>
-      <Input helperText="Food" onChange={handleFoodChange} />
+      <Input className={styles.input} helperText="Food" onChange={handleFoodChange} />
+      <Input className={styles.input} helperText="Hops" onChange={handleHopsChange} />
     </div>
   );
 }

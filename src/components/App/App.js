@@ -3,7 +3,9 @@ import {
   BrowserRouter as Router,
 } from 'react-router-dom';
 import { Route } from 'react-router';
-import { SET_FAVORITES, TOGGLE_FAVORITES, INCREASE_PAGE_COUNT } from '../../constants/actionTypes';
+import {
+  SET_FAVORITES, TOGGLE_FAVORITES, INCREASE_PAGE_COUNT, RESET_PAGE_NUMBER,
+} from '../../constants/actionTypes';
 import BeerApi from '../../API/BeerApi';
 import AppContext from '../../contexts/AppContext';
 import BeerDetails from '../BeerDetails/BeerDetails';
@@ -46,6 +48,8 @@ const reducer = (state, action) => {
       return { ...state, favoriteBeerIds: setFavoriteBeers() };
     case INCREASE_PAGE_COUNT:
       return { ...state, pageNumber: state.pageNumber + 1 };
+    case RESET_PAGE_NUMBER:
+      return { ...state, pageNumber: 1 };
     default:
       return 'Error';
   }

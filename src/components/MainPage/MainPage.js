@@ -5,11 +5,14 @@ import MainPageContext from '../../contexts/MainPageContext';
 import styles from './MainPage.module.css';
 import Header from '../App/Header/Header';
 import AllBeers from '../AllBeers/AllBeers';
-import { UPDATE_BEERS, LOAD_ALL_DATA, REPLACE_BEERS } from '../../constants/actionTypes';
+import {
+  UPDATE_BEERS, TOGGLE_LOAD_ALL_DATA, REPLACE_BEERS, SET_FILTER_PARAMS,
+} from '../../constants/actionTypes';
 
 const mainPageState = {
   beers: [],
   isAllDataLoaded: false,
+  filterParams: null,
 };
 
 /**
@@ -24,8 +27,10 @@ const mainPageReducer = (state, action) => {
       return { ...state, beers: [...state.beers, ...transformResult(action.beers)] };
     case REPLACE_BEERS:
       return { ...state, beers: action.beers.map((b) => new Beer(b)) };
-    case LOAD_ALL_DATA:
-      return { ...state, isAllDataLoaded: true };
+    case TOGGLE_LOAD_ALL_DATA:
+      return { ...state, isAllDataLoaded: action.isAllDataLoaded };
+    case SET_FILTER_PARAMS:
+      return { ...state, filterParams: { ...state.filterParams, ...action.filterParams } };
     default:
       return 'Error!!';
   }

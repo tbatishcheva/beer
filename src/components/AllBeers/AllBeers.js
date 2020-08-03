@@ -1,19 +1,33 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import ShowMoreButton from './ShowMoreButton/ShowMoreButton';
-import { UPDATE_BEERS, INCREASE_PAGE_COUNT, LOAD_ALL_DATA } from '../../constants/actionTypes';
+import {
+  UPDATE_BEERS, INCREASE_PAGE_COUNT, TOGGLE_LOAD_ALL_DATA, REPLACE_BEERS,
+} from '../../constants/actionTypes';
 import MainPageContext from '../../contexts/MainPageContext';
 import styles from './AllBeers.module.css';
 import BeerList from '../BeerList/BeerList';
 import AppContext from '../../contexts/AppContext';
 
 function AllBeers() {
-  const { beers, isAllDataLoaded, mainPageDispatch } = useContext(MainPageContext);
+  const {
+    beers, isAllDataLoaded, mainPageDispatch, filterParams,
+  } = useContext(MainPageContext);
   const { beerApi, pageNumber, dispatch } = useContext(AppContext);
 
   const updateBeers = useCallback((beersRes) => {
     if (!beersRes || beersRes.length === 0) {
       mainPageDispatch({
-        type: LOAD_ALL_DATA,
+        type: TOGGLE_LOAD_ALL_DATA,
+        isAllDataLoaded: true,
+      });
+
+      return;
+    }
+
+    if (pageNumber === 1) {
+      mainPageDispatch({
+        type: REPLACE_BEERS,
+        beers: beersRes,
       });
 
       return;
@@ -23,11 +37,11 @@ function AllBeers() {
       type: UPDATE_BEERS,
       beers: beersRes,
     });
-  }, [mainPageDispatch]);
+  }, [mainPageDispatch, pageNumber]);
 
   const fetchBeers = useCallback(() => {
-    beerApi.fetchAllBeer(pageNumber).then((res) => updateBeers(res));
-  }, [beerApi, pageNumber, updateBeers]);
+    beerApi.fetchBeerByParam(filterParams, pageNumber).then((res) => updateBeers(res));
+  }, [beerApi, pageNumber, updateBeers, filterParams]);
 
   useEffect(() => {
     fetchBeers();
@@ -41,7 +55,7 @@ function AllBeers() {
     dispatch({
       type: INCREASE_PAGE_COUNT,
     });
-  }, [dispatch, fetchBeers, isAllDataLoaded]);
+  }, [dispatch, isAllDataLoaded]);
 
   return (
     <div className={styles.allBeers}>

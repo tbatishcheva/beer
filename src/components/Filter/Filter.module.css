@@ -1,7 +1,6 @@
 .filter {
     width: 100%;
     background-color: #2a2834;
-    /*font-family: 'Galada', cursive;*/
     font-size: 32px;
 
     color: white;
@@ -12,4 +11,12 @@
 
 .title {
     margin: 20px;
+}
+
+.input {
+    margin: 0 10px 0 0;
+}
+
+.input:last-child {
+    margin: 0;
 }

@@ -3,16 +3,6 @@ const MAIN_API = 'https://api.punkapi.com/v2/beers';
 
 export default class BeerApi {
   /**
-   * @param {number} pageNumber
-   * @return {Promise}
-   */
-  fetchAllBeer(pageNumber) {
-    return fetch(`${MAIN_API}?page=${pageNumber}`)
-      .then((res) => res.json())
-      .catch();
-  }
-
-  /**
    * @param {number[]} ids
    * @return {Promise}
    */
@@ -34,11 +24,21 @@ export default class BeerApi {
   }
 
   /**
-   * @param {string} food
+   * @param {Object} param
+   * @param {number} pageNumber
    * @return {Promise}
    */
-  fetchBeerByFood(food) {
-    return fetch(`${MAIN_API}?food=${food}`)
+  fetchBeerByParam(param, pageNumber) {
+    let urlParams = [];
+    if (param && Object.keys(param).length > 0) {
+      Object.keys(param).forEach(key=>{
+        urlParams.push( `${key}=${param[key]}`);
+      })
+    }
+
+    urlParams = urlParams.join('&');
+
+    return fetch(`${MAIN_API}?${urlParams}&page=${pageNumber}`)
       .then((res) => res.json())
       .catch();
   }
