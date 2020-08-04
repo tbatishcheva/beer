@@ -2,12 +2,12 @@ import React, { useReducer } from 'react';
 import Filter from '../Filter/Filter';
 import Beer from '../../models/Beer';
 import MainPageContext from '../../contexts/MainPageContext';
-import styles from './MainPage.module.css';
 import Header from '../App/Header/Header';
 import AllBeers from '../AllBeers/AllBeers';
 import {
   UPDATE_BEERS, TOGGLE_LOAD_ALL_DATA, REPLACE_BEERS, SET_FILTER_PARAMS,
 } from '../../constants/actionTypes';
+import styles from './MainPage.module.css';
 
 const mainPageState = {
   beers: [],

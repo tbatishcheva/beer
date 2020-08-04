@@ -15,13 +15,15 @@ function AllBeers() {
   const { beerApi, pageNumber, dispatch } = useContext(AppContext);
 
   const updateBeers = useCallback((beersRes) => {
+    if (beersRes.error) {
+      return;
+    }
+
     if (!beersRes || beersRes.length === 0) {
       mainPageDispatch({
         type: TOGGLE_LOAD_ALL_DATA,
         isAllDataLoaded: true,
       });
-
-      return;
     }
 
     if (pageNumber === 1) {

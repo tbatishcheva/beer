@@ -1,8 +1,8 @@
 import React, { useEffect, useReducer } from 'react';
 import {
-  BrowserRouter as Router,
+  BrowserRouter as Router, Route,
 } from 'react-router-dom';
-import { Route } from 'react-router';
+import { QueryParamProvider } from 'use-query-params';
 import {
   SET_FAVORITES, TOGGLE_FAVORITES, INCREASE_PAGE_COUNT, RESET_PAGE_NUMBER,
 } from '../../constants/actionTypes';
@@ -67,21 +67,23 @@ function App() {
   return (
     <AppContext.Provider value={{ ...state, dispatch }}>
       <Router>
-        <Route
-          exact
-          path="/beer/:id"
-          render={() => <BeerDetails />}
-        />
-        <Route
-          exact
-          path="/favorites"
-          render={() => <FavoritePage />}
-        />
-        <Route
-          exact
-          path="/"
-          render={() => <MainPage />}
-        />
+        <QueryParamProvider ReactRouterRoute={Route}>
+          <Route
+            exact
+            path="/beer/:id"
+            render={() => <BeerDetails />}
+          />
+          <Route
+            exact
+            path="/favorites"
+            render={() => <FavoritePage />}
+          />
+          <Route
+            exact
+            path="/"
+            render={() => <MainPage />}
+          />
+        </QueryParamProvider>
       </Router>
     </AppContext.Provider>
   );
