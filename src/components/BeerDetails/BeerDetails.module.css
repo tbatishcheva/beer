@@ -1,7 +1,8 @@
 .beerDetails {
-    padding: 50px 200px;
+    margin: 50px 200px;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .image img {
@@ -16,7 +17,74 @@
     flex: 300px;
 }
 
+.descriptionWrapper {
+    margin: 20px 50px;
+}
+
+.descrTitle {
+    font-weight: 500;
+}
+
 .description {
-    padding: 20px;
-    flex: 300px;
+    margin: 10px 0;
+}
+
+.right {
+}
+
+.left {
+    margin: 0 50px;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.name {
+    font-weight: 500;
+    padding: 20px 0;
+    font-size: 32px;
+}
+
+.tagline {
+    padding: 0 0 10px 0;
+}
+
+.firstBrewed {
+    padding: 0 0 10px 0;
+}
+
+.properties {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 490px;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.contributedWrapper {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.contributedTitle {
+    margin: 0 4px 0 0;
+}
+
+.contributed {
+    font-weight: 500;
+}
+
+.foodPairingWrapper {
+    margin: 20px auto;
+}
+
+.foodPairingTitle {
+    margin: 10px 0;
 }

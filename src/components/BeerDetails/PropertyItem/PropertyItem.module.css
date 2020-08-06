@@ -1,0 +1,19 @@
+.propertyItem {
+    background-color: #dfdfdf;
+    padding: 20px 10px;
+    border: thin solid #4f4f4f;
+    min-width: 110px;
+    max-width: 310px;
+    border-radius: 6px;
+    flex: auto;
+}
+
+.name {
+    font-size: 20px;
+    color: #4e4e4e;
+}
+
+.value {
+    font-size: 32px;
+    padding: 10px 0 0 0;
+}

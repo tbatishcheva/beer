@@ -55,7 +55,7 @@ const reducer = (state, action) => {
   }
 };
 
-function App() {
+export default function App() {
   const [state, dispatch] = useReducer(reducer, appState);
 
   useEffect(() => {
@@ -88,5 +88,3 @@ function App() {
     </AppContext.Provider>
   );
 }
-
-export default App;

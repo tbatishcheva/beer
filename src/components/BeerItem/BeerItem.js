@@ -1,17 +1,17 @@
 import React, { useCallback, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import styles from './BeerItem.module.css';
 import Beer from '../../models/Beer';
 import Button, { DEFAULT_COLOR, HIGHLIGHTED_COLOR } from '../Button/Button';
 import AppContext from '../../contexts/AppContext';
 import { TOGGLE_FAVORITES } from '../../constants/actionTypes';
+import styles from './BeerItem.module.css';
 
 BeerItem.propTypes = {
   beer: PropTypes.instanceOf(Beer).isRequired,
 };
 
-function BeerItem({ beer }) {
+export default function BeerItem({ beer }) {
   const { dispatch, favoriteBeerIds } = useContext(AppContext);
 
   const handleLikeClick = useCallback(
@@ -59,5 +59,3 @@ function BeerItem({ beer }) {
     </div>
   );
 }
-
-export default BeerItem;
