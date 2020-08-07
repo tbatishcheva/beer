@@ -1,4 +1,6 @@
 /* eslint-disable camelcase */
+import Property from './Property';
+
 export default class Beer {
     /**
      * @type {number}
@@ -108,5 +110,18 @@ export default class Beer {
       this.srm = srm;
       this.contributed_by = contributed_by;
       this.food_pairing = food_pairing;
+    }
+
+    /**
+     * @return {Property[]}
+     */
+    getProperties() {
+      return [
+        new Property({ name: 'abv', value: this.abv }),
+        new Property({ name: 'ebc', value: this.ebc }),
+        new Property({ name: 'ibu', value: this.ibu }),
+        new Property({ name: 'ph', value: this.ph }),
+        new Property({ name: 'srm', value: this.srm }),
+      ];
     }
 }
