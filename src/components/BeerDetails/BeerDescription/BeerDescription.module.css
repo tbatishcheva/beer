@@ -1,0 +1,32 @@
+.beerDescription {
+}
+
+.descrTitle {
+    font-weight: 500;
+}
+
+.description {
+    margin: 10px 0;
+}
+
+.contributedWrapper {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+@media (max-width: 576px) {
+    .contributedWrapper {
+        flex-direction: column;
+    }
+}
+
+.contributedTitle {
+    margin: 0 4px 0 0;
+}
+
+.contributed {
+    font-weight: 500;
+}
+
